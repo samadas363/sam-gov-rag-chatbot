@@ -1,15 +1,25 @@
 ﻿# SAM.gov Contract Analysis Chatbot (RAG)
 
-A simple retrieval-augmented chatbot that answers questions about federal contract
-opportunities from [SAM.gov](https://sam.gov). Built as a portfolio project.
+A retrieval-augmented chatbot that answers questions about US federal contract opportunities from [SAM.gov](https://sam.gov), with source citations. Built as a portfolio project.
+
+**Tech stack:** Python, Streamlit, ChromaDB, Claude API, SAM.gov Opportunities API
+
+## Screenshots
+
+![Open notices](screenshots/01-open-notices.png)
+![Set-aside filter](screenshots/02-set-asides.png)
+![Due dates](screenshots/03-due-dates.png)
+![Sorted by date](screenshots/04-sorted-dates.png)
+![Top agencies](screenshots/05-top-agencies.png)
+![Agencies](screenshots/06-agencies.png)
 
 ## How it works
 
 ```
-SAM.gov Opportunities API â”€â”€â–º clean + chunk â”€â”€â–º ChromaDB (local embeddings)
-                                                      â”‚
- user question â”€â”€â–º semantic search (top-k, optional NAICS filter)
-                                                      â”‚
+SAM.gov Opportunities API --> clean + chunk --> ChromaDB (local embeddings)
+                                                      |
+ user question --> semantic search (top-k, optional NAICS filter)
+                                                      |
                      Claude answers using ONLY retrieved notices, with [n] citations
 ```
 
@@ -24,12 +34,26 @@ SAM.gov Opportunities API â”€â”€â–º clean + chunk â”€â”€
 
 ## Quickstart
 
+**Windows (PowerShell)**
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+copy .env.example .env        # then add ANTHROPIC_API_KEY (and SAM_API_KEY for live data)
+
+python ingest.py --sample     # or: python ingest.py --targets --days 14 --limit 25
+streamlit run app.py
+```
+
+**macOS / Linux**
+
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env        # add ANTHROPIC_API_KEY (and SAM_API_KEY for live data)
+cp .env.example .env          # then add ANTHROPIC_API_KEY (and SAM_API_KEY for live data)
 
-python ingest.py --sample   # or: python ingest.py --targets --days 14 --limit 25
+python ingest.py --sample     # or: python ingest.py --targets --days 14 --limit 25
 streamlit run app.py
 ```
 
@@ -44,25 +68,16 @@ First run downloads a small local embedding model (~80 MB).
 - Summarize the evaluation criteria for the CISA notice.
 
 ## Notes
-- Get a free SAM.gov API key from your SAM.gov account profile. Non-federal keys have tight
-  daily rate limits, so use `--no-desc` or small `--limit` values while testing
-  (check the SAM.gov API docs for current limits).
+- Get a free SAM.gov API key from your SAM.gov account profile. Non-federal keys have tight daily rate limits, so use `--no-desc` or small `--limit` values while testing (check the SAM.gov API docs for current limits).
 - The search endpoint requires a posted-date range of up to one year; this project defaults to recent days.
 - Sample data is synthetic. Verify anything important on SAM.gov; this is not legal or bid advice.
 
-## Ideas to extend (good talking points)
+## Ideas to extend
 - Hybrid search (BM25 + vectors) and a reranker
 - Pull awards from USAspending.gov to add incumbent/pricing context
 - Structured extraction (clearances, contract type, NAICS) into filterable metadata
 - Evaluation set of Q&A pairs to measure retrieval hit rate and answer faithfulness
 - Deploy on Streamlit Community Cloud or Hugging Face Spaces
 
-
-## Screenshots
-
-![Open notices](screenshots/01-open-notices.png)
-![Set-aside filter](screenshots/02-set-asides.png)
-![Due dates](screenshots/03-due-dates.png)
-![Sorted by date](screenshots/04-sorted-dates.png)
-![Top agencies](screenshots/05-top-agencies.png)
-![Agencies](screenshots/06-agencies.png)
+## Built by
+[samadas363](https://github.com/samadas363)
