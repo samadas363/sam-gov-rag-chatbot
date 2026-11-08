@@ -10,15 +10,18 @@ from ingest import load_sample
 from naics import NAICS_TITLES, label
 
 load_dotenv()
-st.set_page_config(page_title="SAM.gov Contract Analyst", layout="wide")
+st.set_page_config(page_title="Geospatial Solutions LLC | SAM.gov Contract Analyst", layout="wide")
 st.title("SAM.gov Contract Analysis Chatbot")
 st.caption("RAG over federal contract opportunities | ChromaDB + Claude")
+st.markdown("**Built by Abdul Samad** | **Geospatial Solutions LLC** | [LinkedIn](https://www.linkedin.com/in/abdul-samad-da)")
+st.caption("U.S. Federal Contracts Analyst | GovCon BD Intelligence | Solicitation Analysis | Compliance & Requirements Review | Bid/No-Bid Analysis | Python | SQL | AI & RAG Automation")
 
 if "backfilled" not in st.session_state:
     rag.backfill()
     st.session_state.backfilled = True
 
 with st.sidebar:
+    st.markdown("**Geospatial Solutions LLC**  \nAbdul Samad")
     st.header("Data")
     st.metric("Indexed chunks", rag.count())
 

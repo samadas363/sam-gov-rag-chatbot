@@ -57,3 +57,12 @@ First run downloads a small local embedding model (~80 MB).
 - Evaluation set of Q&A pairs to measure retrieval hit rate and answer faithfulness
 - Deploy on Streamlit Community Cloud or Hugging Face Spaces
 
+
+## Screenshots
+
+![Open notices](screenshots/01-open-notices.png)
+![Set-aside filter](screenshots/02-set-asides.png)
+![Due dates](screenshots/03-due-dates.png)
+![Sorted by date](screenshots/04-sorted-dates.png)
+![Top agencies](screenshots/05-top-agencies.png)
+![Agencies](screenshots/06-agencies.png)
