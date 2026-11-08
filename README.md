@@ -81,3 +81,4 @@ First run downloads a small local embedding model (~80 MB).
 
 ## Built by
 [samadas363](https://github.com/samadas363)
+**Live demo:** [your-app-link](https://sam-gov-rag-chatbot-jeiywjmwtz76c6rvgts5wx.streamlit.app)
