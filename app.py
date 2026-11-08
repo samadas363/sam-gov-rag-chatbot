@@ -18,6 +18,8 @@ st.caption("U.S. Federal Contracts Analyst | GovCon BD Intelligence | Solicitati
 
 if "backfilled" not in st.session_state:
     rag.backfill()
+    if rag.count() == 0:
+        rag.index_opportunities(load_sample())
     st.session_state.backfilled = True
 
 with st.sidebar:
